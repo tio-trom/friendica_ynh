@@ -61,12 +61,12 @@ ynh_script_progression --message="Removing PHP-FPM configuration..." --weight=1
 ynh_remove_fpm_config
 
 #=================================================
-# REMOVE LOGROTATE CONFIGURATION
+# REMOVE FAIL2BAN CONFIGURATION
 #=================================================
-ynh_script_progression --message="Removing logrotate configuration..." --weight=1
+ynh_script_progression --message="Removing Fail2ban configuration..." --weight=1
 
-# Remove the app-specific logrotate config
-ynh_remove_logrotate
+# Remove the dedicated Fail2Ban config
+ynh_remove_fail2ban_config
 
 #=================================================
 # REMOVE CRON FILE

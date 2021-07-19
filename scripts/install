@@ -156,6 +156,14 @@ popd
 ynh_mysql_connect_as "$db_name" "$db_pwd" "$db_name" <<< "INSERT INTO addon (id, name, version, installed, hidden, timestamp, plugin_admin) VALUES (NULL, 'ldapauth', '', '1', '0', UNIX_TIMESTAMP(), '0');"
 
 #=================================================
+# SETUP FAIL2BAN
+#=================================================
+ynh_script_progression --message="Configuring Fail2Ban..." --weight=1
+
+# Create a dedicated Fail2Ban config
+ynh_add_fail2ban_config --logpath="/var/log/nginx/${domain}-error.log" --failregex="^.*authenticate\: failed login attempt.*\"ip\"\:\"<HOST>\".*$"
+
+#=================================================
 # RELOAD NGINX
 #=================================================
 ynh_script_progression --message="Reloading NGINX web server..." --weight=1
